@@ -41,21 +41,62 @@ ln -s .cursor/rules/plan.mdc
 Esto asegura que cualquier cambio en un archivo se refleje automáticamente en todos los sistemas.
 
 4. Carga las reglas bajo demanda
-Configura tu entorno para cargar solo las reglas necesarias según el modo. Por ejemplo:
+Configura tu entorno para cargar solo las reglas necesarias según el modo utilizando el archivo de configuración `.cursor/config.json`. Este archivo define qué reglas cargar para cada modo de Cursor:
 
-En Cursor, utiliza la configuración avanzada para cargar reglas específicas del modo.
+```json
+{
+  "version": 1,
+  "modes": {
+    "chat": {
+      "template": ".cursor/modes/chat-mode.mdc",
+      "rules": [
+        ".cursor/rules/rules.mdc",
+        ".cursor/rules/memory.mdc",
+        ".cursor/rules/plan.mdc"
+      ]
+    },
+    "write": {
+      "template": ".cursor/modes/write-mode.mdc",
+      "rules": [
+        ".cursor/rules/rules.mdc",
+        ".cursor/rules/implement.mdc",
+        ".cursor/rules/directory-structure.mdc"
+      ]
+    },
+    "mcp": {
+      "template": ".cursor/modes/mcp-mode.mdc",
+      "rules": [
+        ".cursor/rules/rules.mdc",
+        ".cursor/rules/debug.mdc"
+      ]
+    }
+  },
+  "defaultMode": "chat"
+}
+```
+
+En Cursor, esta configuración asegura que se carguen solo las reglas específicas para cada modo.
 1. Actualiza la documentación
 Asegúrate de que los archivos de documentación (architecture.md, technical.md, product_requirement_docs.md, etc.) estén actualizados con la información de tu proyecto. Si ya tienes documentación existente, combínala con los archivos del rules_template.
 
 1. Configura los modos personalizados
-Sigue las instrucciones del rules_template para configurar los modos personalizados en Cursor. Por ejemplo:
+Sigue las instrucciones del rules_template para configurar los modos personalizados en Cursor. Los modos personalizados se configuran a través de los archivos de plantilla en el directorio `.cursor/modes/` y el archivo de configuración `.cursor/config.json`.
+
+Para utilizar los modos personalizados:
 
 Modo Chat:
-Instrucciones personalizadas: "Solicita aclaraciones y seguimientos profundos tanto como sea posible..."
+- Plantilla ubicada en `.cursor/modes/chat-mode.mdc`
+- Instrucciones personalizadas: "Solicita aclaraciones y seguimientos profundos tanto como sea posible..."
+
 Modo Write:
-Instrucciones personalizadas: "Crear y editar archivos y directorios..."
+- Plantilla ubicada en `.cursor/modes/write-mode.mdc`
+- Instrucciones personalizadas: "Crear y editar archivos y directorios..."
+
 Modo MCP:
-Instrucciones personalizadas: "Ejecute servidores MCP conectados..."
+- Plantilla ubicada en `.cursor/modes/mcp-mode.mdc`
+- Instrucciones personalizadas: "Ejecute servidores MCP conectados..."
+
+Estos modos están configurados en el archivo `.cursor/config.json` que especifica qué plantilla y reglas se deben cargar para cada modo.
 1. Integra el banco de memoria
 Asegúrate de que el banco de memoria común esté configurado para mantener el contexto entre los asistentes de IA. Esto incluye:
 

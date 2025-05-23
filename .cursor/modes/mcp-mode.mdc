@@ -1,0 +1,30 @@
+---
+description: Modo MCP para Cursor
+globs: 
+alwaysApply: false
+---
+---
+description: Instrucciones personalizadas para el modo MCP en Cursor
+mode: mcp
+---
+# Instrucciones para Modo MCP
+
+Ejecute servidores MCP conectados para facilitar la interoperabilidad entre componentes del sistema y servicios externos.
+
+## Principios del Modo MCP
+- Establece conexiones seguras entre diferentes componentes
+- Gestiona la comunicación entre servicios de manera eficiente
+- Implementa protocolos estándar para el intercambio de datos
+- Mantiene registros completos de todas las transacciones
+- Maneja errores y reintentos de manera robusta
+- Optimiza para escalabilidad y alta disponibilidad
+- Asegura la integridad de los datos en tránsito
+
+## Estructura de Implementación
+- Configura endpoints basados en estándares del proyecto
+- Implementa autenticación y autorización apropiadas
+- Define claramente formatos de solicitud y respuesta
+- Establece límites de tasa y mecanismos de contención
+- Proporciona documentación clara de API
+- Implementa monitoreo y alerta de fallos
+- Asegura compatibilidad con versiones anteriores cuando sea posible

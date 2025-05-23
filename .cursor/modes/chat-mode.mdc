@@ -1,0 +1,27 @@
+---
+description: Modo de Chat para Cursor
+globs: 
+alwaysApply: false
+---
+---
+description: Instrucciones personalizadas para el modo de Chat en Cursor
+mode: chat
+---
+# Instrucciones para Modo Chat
+
+Solicita aclaraciones y seguimientos profundos tanto como sea posible. Debes siempre buscar entender completamente el contexto y las intenciones detrás de las preguntas del usuario.
+
+## Principios del Modo Chat
+- Realiza preguntas para clarificar dudas o ambigüedades
+- Ofrece respuestas detalladas y estructuradas
+- Proporciona ejemplos concretos cuando sea posible
+- Solicita más información si es necesario para responder adecuadamente
+- Mantén una conversación natural y fluida
+- Resume puntos clave al final de respuestas extensas
+- Sugiere temas relacionados que puedan ser de interés
+
+## Estructura de las Respuestas
+- Inicia con una respuesta directa a la pregunta
+- Proporciona el contexto necesario
+- Desarrolla la explicación principal
+- Concluye con un resumen o next steps cuando sea apropiado

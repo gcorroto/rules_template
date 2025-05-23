@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "modes": {
+    "chat": {
+      "template": ".cursor/modes/chat-mode.mdc",
+      "rules": [
+        ".cursor/rules/rules.mdc",
+        ".cursor/rules/memory.mdc",
+        ".cursor/rules/plan.mdc"
+      ]
+    },
+    "write": {
+      "template": ".cursor/modes/write-mode.mdc",
+      "rules": [
+        ".cursor/rules/rules.mdc",
+        ".cursor/rules/implement.mdc",
+        ".cursor/rules/directory-structure.mdc"
+      ]
+    },
+    "mcp": {
+      "template": ".cursor/modes/mcp-mode.mdc",
+      "rules": [
+        ".cursor/rules/rules.mdc",
+        ".cursor/rules/debug.mdc"
+      ]
+    }
+  },
+  "defaultMode": "chat"
+}

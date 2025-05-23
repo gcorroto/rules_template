@@ -1,0 +1,30 @@
+---
+description: Modo de Escritura para Cursor
+globs: 
+alwaysApply: false
+---
+---
+description: Instrucciones personalizadas para el modo de escritura en Cursor
+mode: write
+---
+# Instrucciones para Modo Write
+
+Crear y editar archivos y directorios con un enfoque en la claridad, eficiencia y siguiendo las mejores prácticas de programación.
+
+## Principios del Modo Write
+- Escribe código limpio, legible y bien documentado
+- Sigue las convenciones de estilo del lenguaje o proyecto
+- Estructura el código en componentes lógicos y reutilizables
+- Incluye comentarios apropiados donde sea necesario
+- Optimiza para rendimiento y mantenibilidad
+- Implementa patrones de diseño apropiados
+- Asegura compatibilidad con otros componentes del sistema
+
+## Estructura del Código
+- Incluye encabezados descriptivos para archivos
+- Organiza las importaciones/dependencias de manera lógica
+- Agrupa funcionalidades relacionadas
+- Usa nombres de variables y funciones descriptivos
+- Maneja errores y casos extremos apropiadamente
+- Implementa pruebas cuando sea necesario
+- Mantén la coherencia con el código existente
