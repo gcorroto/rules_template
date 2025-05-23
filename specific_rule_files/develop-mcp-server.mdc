@@ -1,0 +1,121 @@
+---
+description: Instrucciones base para desarrollar servidores MCP.
+globs: 
+alwaysApply: false
+---
+# Protocolo de Desarrollo de Plugins MCP
+
+⚠️ CRÍTICO: NO USES attempt_completion ANTES DE PROBAR ⚠️
+
+## Paso 1: Planificación (MODO PLAN)
+- ¿Qué problema resuelve esta herramienta?
+- ¿Qué API/servicio utilizará?
+- ¿Cuáles son los requisitos de autenticación?
+  □ Clave API estándar  
+  □ OAuth (requiere un script de configuración separado)  
+  □ Otras credenciales  
+
+## Paso 2: Implementación (MODO ACT)
+1. Inicialización
+   - Para servicios web, integración con JavaScript o entornos Node.js:
+     ```bash
+     npx @modelcontextprotocol/create-server my-server
+     cd my-server
+     npm install
+     ```
+   - Para ciencia de datos, flujos de trabajo de ML o entornos Python:
+     ```bash
+     pip install mcp
+     # O con uv (recomendado)
+     uv add "mcp[cli]"
+     ```
+
+2. Implementación Principal
+   - Usa MCP SDK
+   - Implementa un registro de logs completo
+     - TypeScript (para proyectos web/JS):
+       ```typescript
+       console.error('[Setup] Inicializando servidor...');
+       console.error('[API] Solicitud al endpoint:', endpoint);
+       console.error('[Error] Falló con:', error);
+       ```
+     - Python (para proyectos de ciencia de datos/ML):
+       ```python
+       import logging
+       logging.error('[Setup] Inicializando servidor...')
+       logging.error(f'[API] Solicitud al endpoint: {endpoint}')
+       logging.error(f'[Error] Falló con: {str(error)}')
+       ```
+   - Agrega definiciones de tipos
+   - Maneja errores con contexto
+   - Implementa limitación de tasa si es necesario
+
+3. Configuración
+   - Obtén credenciales del usuario si es necesario
+   - Agrega a la configuración de MCP:
+     - Para proyectos TypeScript:
+       ```json
+       {
+         "mcpServers": {
+           "my-server": {
+             "command": "node",
+             "args": ["path/to/build/index.js"],
+             "env": {
+               "API_KEY": "key"
+             },
+             "disabled": false,
+             "autoApprove": []
+           }
+         }
+       }
+       ```
+     - Para proyectos Python:
+       ```bash
+       # Directamente desde la línea de comandos
+       mcp install server.py -v API_KEY=key
+       
+       # O en settings.json
+       {
+         "mcpServers": {
+           "my-server": {
+             "command": "python",
+             "args": ["server.py"],
+             "env": {
+               "API_KEY": "key"
+             },
+             "disabled": false,
+             "autoApprove": []
+           }
+         }
+       }
+       ```
+
+## Paso 3: Pruebas (BLOQUEADOR ⛔️)
+
+<thinking>
+ANTES de usar attempt_completion, DEBO verificar:
+□ ¿He probado CADA herramienta?  
+□ ¿He confirmado el éxito del usuario para cada prueba?  
+□ ¿He documentado los resultados de las pruebas?  
+
+Si ALGUNA respuesta es "no", NO DEBO usar attempt_completion.
+</thinking>
+
+1. Prueba Cada Herramienta (OBLIGATORIO)
+   □ Prueba cada herramienta con entradas válidas  
+   □ Verifica que el formato de salida sea correcto  
+   ⚠️ NO CONTINÚES HASTA QUE TODAS LAS HERRAMIENTAS SEAN PROBADAS  
+
+## Paso 4: Finalización
+❗ DETENTE Y VERIFICA:
+□ Cada herramienta ha sido probada con entradas válidas  
+□ El formato de salida es correcto para cada herramienta  
+
+Solo después de que TODAS las herramientas hayan sido probadas se puede usar attempt_completion.
+
+## Requisitos Clave
+- ✓ Debe usar MCP SDK  
+- ✓ Debe tener un registro de logs completo  
+- ✓ Debe probar cada herramienta individualmente  
+- ✓ Debe manejar errores de manera adecuada  
+- ⛔️ NUNCA omitas las pruebas antes de la finalización  

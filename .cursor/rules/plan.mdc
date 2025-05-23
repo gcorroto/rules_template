@@ -1,0 +1,77 @@
+---
+description: Siempre incluye estas reglas.
+globs: 
+alwaysApply: true
+---
+Antes de cada tarea de Planificación/Arquitectura SIEMPRE haz 3 cosas:
+a. Lee la documentación existente en `docs/`: i. `docs/architecture.md`, ii. `docs/product_requirement_docs.md`, iii. `docs/technical.md`
+b. Lee los planes y la planificación de tareas relacionadas y el contexto en `tasks/`: i. `tasks/active_context.md`, ii. `tasks/tasks_plan.md`
+c. Obtén el contexto de solución requerido de los archivos de código en `src` y otros códigos en otros lugares.
+---
+# A continuación se muestra el Flujo de Trabajo de Planificación a seguir:
+
+1. ENTENDER los REQUISITOS:
+<ACLARACIÓN>
+- Siempre pide aclaraciones y seguimientos.
+- Identifica requisitos poco especificados y solicita información detallada.
+- Comprende completamente todos los aspectos del problema y recopila detalles para hacerlo muy preciso y claro.
+- Pregunta sobre todas las hipótesis y suposiciones necesarias. Elimina todas las ambigüedades e incertidumbres.
+- Sugiere soluciones que no haya considerado, es decir, anticipa mis necesidades y cosas que deben especificarse.
+- Solo después de tener cien por ciento de claridad y confianza, procede con la SOLUCIÓN.
+</ACLARACIÓN>
+
+2. FORMULAR la SOLUCIÓN:
+<RAZONAMIENTO PASO A PASO>
+<DESCOMPONER>
+- Ten un plan de meta-arquitectura para la solución.
+- Divide el problema en conceptos clave y subproblemas más pequeños.
+</DESCOMPONER>
+a. Piensa en todas las formas posibles de resolver el problema.
+b. Establece los criterios de evaluación y compensaciones para evaluar el mérito de las soluciones.
+c. Encuentra la solución óptima y los criterios que la hacen óptima, así como las compensaciones involucradas.
+<USO WEB> Puedes usar la web si es necesario utilizando comandos de use_mcp_tool, particularmente utiliza la herramienta de búsqueda de Perplexity. Ejemplo:
+<use_mcp_tool>
+<server_name>perplexity-mcp</server_name>
+<tool_name>search</tool_name>
+<arguments>
+{
+  "param1": "value1",
+  "param2": "value2"
+}
+</arguments>
+</use_mcp_tool>
+</USO WEB>
+
+<MÚLTIPLES INTENTOS>
+a. Razona rigurosamente sobre la optimalidad de la solución.
+b. Cuestiona cada suposición e inferencia, y respáldalas con un razonamiento completo.
+c. Piensa en mejores soluciones que la actual combinando los aspectos más fuertes de diferentes soluciones.
+d. Repite el proceso <MÚLTIPLES INTENTOS> refinando e integrando diferentes soluciones en una hasta encontrar una solución sólida.
+d. Puedes usar <USO WEB> si es necesario para investigar.
+</MÚLTIPLES INTENTOS>
+</RAZONAMIENTO PASO A PASO>
+
+3. VALIDACIÓN de la SOLUCIÓN:
+
+<PRESENTACIÓN DE RAZONAMIENTO>
+- Proporciona el PLAN con el mayor detalle posible.
+- Divide la solución paso a paso y analiza cada paso en detalle con claridad.
+- Razona sobre su optimalidad con respecto a otras soluciones prometedoras.
+- Explica explícitamente todas tus suposiciones, elecciones y decisiones.
+- Explica las compensaciones en las soluciones.
+- Reformula mi consulta con tus propias palabras si es necesario después de dar la solución.
+</PRESENTACIÓN DE RAZONAMIENTO>
+- Antes de implementar, valida el plan de SOLUCIÓN producido por <PRESENTACIÓN DE RAZONAMIENTO>.
+
+---
+# Características del Plan:
+1. El plan debe ser:
+a. `extensible`: Se pueden construir más códigos fácilmente sobre la planificación actual. Y extenderlo en el futuro será bien soportado. Anticipa funcionalidades futuras y haz que el plan sea adaptable a ellas.
+b. `detallado`: El plan debe ser muy detallado, teniendo en cuenta todos los aspectos que se verán afectados y de todas las formas posibles.
+c. `robusto`: Planifica para escenarios de error y casos de falla y ten alternativas para posibles fallas.
+d. `preciso`: Cada aspecto debe estar sincronizado con los demás y los componentes individuales deben ser correctos, así como las interfaces.
+---
+
+Después de cada tarea de Planificación/Arquitectura SIEMPRE haz 2 cosas:
+a. Documenta el plan en la documentación existente y actualiza los archivos en `docs/`: i. `docs/architecture.md`, ii. `docs/product_requirement_docs.md`, iii. `docs/technical.md`
+b. Documenta los planes y la planificación de tareas relacionadas y el contexto en `tasks/`: i. `tasks/active_context.md`, ii. `tasks/tasks_plan.md`

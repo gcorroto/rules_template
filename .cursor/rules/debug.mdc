@@ -1,0 +1,23 @@
+---
+description: Incluir estas reglas durante la DEPURACIÓN.
+globs: 
+alwaysApply: true
+---
+<DEPURACIÓN>
+La siguiente rutina de depuración es para errores persistentes o correcciones incompletas. Utiliza esta rutina solo cuando estés atascado.
+<DIAGNOSTICAR>
+- Recopilar todos los mensajes de error, registros y síntomas de comportamiento
+- Añadir contexto relevante de los archivos
+- Recuperar la arquitectura relevante del proyecto, el plan y la tarea actual según se especifica en @memory.mdc 
+</DIAGNOSTICAR>
+
+- Cuando falles con cualquier resultado de prueba, siempre añade más contexto usando <DIAGNOSTICAR> y depura el problema de manera efectiva primero, luego cuando tengas información completa avanza hacia una solución.
+- Explica tus OBSERVACIONES y luego da tus RAZONAMIENTOS para explicar por qué este es EXACTAMENTE el problema y no otra cosa.
+- Si no estás seguro, primero obtén más OBSERVACIONES añadiendo más contexto <DIAGNOSTICAR> al problema para que sepas exacta y específicamente qué está mal. Adicionalmente, puedes buscar <ACLARACIÓN> si es necesario.
+- Comprende la arquitectura usando <ANALIZAR CÓDIGO> (definido en [implement.mdc](mdc:.cursor/rules/implement.mdc)) relevante para el problema.
+- Utiliza <RAZONAMIENTO PASO A PASO> para pensar en todas las posibles causas como desalineación arquitectónica, fallo de diseño en lugar de solo un error, etc.
+- Busca patrones similares ya resueltos en otra parte del código base en @error-documentation.mdc y <USO WEB> si es necesario
+- Presenta tu solución usando <PRESENTACIÓN DE RAZONAMIENTO> para validación.
+- Comienza a modificar el código para actualizar y arreglar cosas usando <PROTOCOLO SISTEMÁTICO DE CÓDIGO> y <PRUEBAS> (ambos definidos en [implement.mdc](mdc:.cursor/rules/implement.mdc)).
+
+</DEPURACIÓN>

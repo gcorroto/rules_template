@@ -1,0 +1,22 @@
+---
+description: reglas para analizar la arquitectura de solución desde docs/architecture.md
+globs: 
+alwaysApply: false
+---
+# Comprensión de la Arquitectura
+READ_ARCHITECTURE: |
+  Archivo: docs/architecture.md @architecture.md
+  Análisis requerido:
+  1. Cargar y analizar el diagrama Mermaid completo
+  2. Extraer y comprender:
+     - Límites de módulos y relaciones
+     - Patrones de flujo de datos
+     - Interfaces del sistema
+     - Dependencias de componentes
+  3. Validar cualquier cambio contra las restricciones arquitectónicas
+  4. Asegurar que el nuevo código mantenga la separación de responsabilidades definida
+  
+  Manejo de errores:
+  1. Si no se encuentra el archivo: DETENER y notificar al usuario
+  2. Si falla el análisis del diagrama: SOLICITAR aclaración
+  3. Si se detecta una violación arquitectónica: ADVERTIR al usuario

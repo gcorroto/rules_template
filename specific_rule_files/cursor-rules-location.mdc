@@ -1,0 +1,80 @@
+---
+description: Ubicación de Reglas de Cursor
+globs: 
+alwaysApply: false
+---
+---
+description: Ubicación de Reglas de Cursor
+globs: *.mdc
+---
+# Ubicación de Reglas de Cursor
+
+Reglas para colocar y organizar los archivos de reglas de Cursor en el repositorio.
+
+<rule>
+name: cursor_rules_location
+description: Estándares para colocar los archivos de reglas de Cursor en el directorio correcto
+filters:
+  # Coincidir con cualquier archivo .mdc
+  - type: file_extension
+    pattern: "\\.mdc$"
+  # Coincidir con archivos que parezcan reglas de Cursor
+  - type: content
+    pattern: "(?s)<rule>.*?</rule>"
+  # Coincidir con eventos de creación de archivos
+  - type: event
+    pattern: "file_create"
+
+actions:
+  - type: reject
+    conditions:
+      - pattern: "^(?!\\.\\/\\.cursor\\/rules\\/.*\\.mdc$)"
+        message: "Los archivos de reglas de Cursor (.mdc) deben colocarse en el directorio .cursor/rules"
+
+  - type: suggest
+    message: |
+      Al crear reglas de Cursor:
+
+      1. Siempre coloca los archivos de reglas en PROJECT_ROOT/.cursor/rules/:
+         ```
+         .cursor/rules/
+         ├── tu-nombre-de-regla.mdc
+         ├── otra-regla.mdc
+         └── ...
+         ```
+
+      2. Sigue la convención de nombres:
+         - Usa kebab-case para los nombres de archivo
+         - Siempre usa la extensión .mdc
+         - Haz que los nombres sean descriptivos del propósito de la regla
+
+      3. Estructura del directorio:
+         ```
+         PROJECT_ROOT/
+         ├── .cursor/
+         │   └── rules/
+         │       ├── tu-nombre-de-regla.mdc
+         │       └── ...
+         └── ...
+         ```
+
+      4. Nunca coloques archivos de reglas:
+         - En la raíz del proyecto
+         - En subdirectorios fuera de .cursor/rules
+         - En cualquier otra ubicación
+
+examples:
+  - input: |
+      # Incorrecto: Archivo de regla en ubicación incorrecta
+      rules/mi-regla.mdc
+      mi-regla.mdc
+      .rules/mi-regla.mdc
+
+      # Correcto: Archivo de regla en la ubicación correcta
+      .cursor/rules/mi-regla.mdc
+    output: "Archivo de regla de Cursor colocado correctamente"
+
+metadata:
+  priority: high
+  version: 1.0
+</rule>

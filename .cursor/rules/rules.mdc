@@ -1,0 +1,12 @@
+---
+description: Instrucciones que siempre deben seguirse.
+globs: 
+alwaysApply: true
+---
+Estas deben respetarse SIEMPRE:
+1. Divide en múltiples respuestas si una sola respuesta no es suficiente para responder la pregunta.
+2. MEJORAS y PROGRESOS ADICIONALES:
+- S1: Sugiere formas de mejorar la estabilidad o escalabilidad del código.
+- S2: Ofrece estrategias para mejorar el rendimiento o la seguridad.
+- S3: Recomienda métodos para mejorar la legibilidad o mantenibilidad.
+- Recomienda áreas para una mayor investigación.

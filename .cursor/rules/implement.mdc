@@ -1,0 +1,122 @@
+---  
+description: Incluir estas reglas durante la IMPLEMENTACIÓN/Codificación.  
+globs:  
+alwaysApply: true  
+---  
+Antes de cada implementación/cambio de código SIEMPRE haz 2 cosas:  
+a. Lee y comprende la documentación en `docs/` y `tasks/`.  
+b. Obtén el contexto de código necesario desde `src` y otros códigos en otros lugares.  
+---  
+# IMPLEMENTACIÓN (Modo ACT/Modo Código):  
+<PRINCIPIOS DE PROGRAMACIÓN>  
+- eficiencia_algorítmica: usa los algoritmos y estructuras de datos más eficientes.  
+- modularidad: escribe código modular, divide la lógica compleja en partes más pequeñas y atómicas. Siempre que sea posible, divídelo en clases, archivos, directorios, módulos, funciones, etc.  
+- gestión_de_archivos: divide archivos largos en archivos más pequeños y manejables con funciones más pequeñas.  
+- declaraciones_de_importación: prefiere importar funciones de otros archivos en lugar de modificarlos directamente.  
+- organización_de_archivos: organiza los archivos en directorios y carpetas.  
+- reutilización: prefiere reutilizar código existente en lugar de escribirlo desde cero.  
+- preservación_de_código: conserva lo que funciona. No modifiques componentes funcionales sin necesidad.  
+- secuencia_sistemática: completa un paso completamente antes de comenzar otro. Mantén una secuencia sistemática de funcionalidades.  
+- patrones_de_diseño: aplica patrones de diseño apropiados para la mantenibilidad. Planifica para futuros cambios, código extensible, flexible, escalable y mantenible.  
+- pruebas_proactivas: cualquier código de funcionalidad debe ir acompañado de un código de prueba adecuado como se describe en <PRUEBAS>.  
+</PRINCIPIOS DE PROGRAMACIÓN>  
+
+<PROTOCOLO SISTEMÁTICO DE CÓDIGO>  
+[Paso: 1]  
+<ANALIZAR CÓDIGO>  
+<ANÁLISIS DE DEPENDENCIAS>  
+- ¿Qué componentes se verán afectados?  
+- ¿Qué dependencias existen?  
+- ¿Es esto local o afecta la lógica central?  
+- ¿Qué funcionalidades se verán afectadas y cómo?  
+- ¿Qué efectos en cascada tendrá este cambio?  
+</ANÁLISIS DE DEPENDENCIAS>  
+<ANÁLISIS DE FLUJO>  
+- Antes de proponer cualquier cambio, realiza un análisis completo de flujo de extremo a extremo del caso de uso relevante desde el punto de entrada (por ejemplo, llamada a función, inicialización de variable) hasta la ejecución de todo el código afectado.  
+- Rastrea el flujo de datos y lógica a través de todos los componentes involucrados para comprender su alcance completo.  
+</ANÁLISIS DE FLUJO>  
+- Documenta estas dependencias a fondo, incluyendo el uso específico de funciones o lógica en los archivos especificados por @memory.mdc.  
+</ANALIZAR CÓDIGO>  
+
+[Paso: 2]  
+<PLANIFICAR CÓDIGO>  
+- Si es necesario, inicia el proceso de <ACLARACIÓN>.  
+- Usa <RAZONAMIENTO PASO A PASO> para delinear un plan detallado que incluya dependencias de componentes y consideraciones arquitectónicas antes de codificar. Usa <PRESENTACIÓN DE RAZONAMIENTO> para explicar todos los cambios de código, qué hace cada parte y cómo afecta a otras áreas.  
+<PROPUESTAS ESTRUCTURADAS>  
+- Proporciona una propuesta que especifique: 1) qué archivos, funciones o líneas de código están siendo cambiados; 2) por qué el cambio es necesario (es decir, corrección de errores, mejora o nueva funcionalidad); 3) todos los módulos o archivos directamente impactados; 4) posibles efectos secundarios; 5) una explicación detallada de cualquier compromiso.  
+</PROPUESTAS ESTRUCTURADAS>  
+</PLANIFICAR CÓDIGO>  
+
+[Paso: 3]  
+<HACER CAMBIOS>  
+
+1. Documenta el estado actual en los archivos especificados por @memory.mdc.  
+- ¿Qué está funcionando actualmente?  
+- ¿Cuál es el error/problema actual?  
+- ¿Qué archivos se verán afectados?  
+
+2. Planifica un único cambio lógico a la vez.  
+<IMPLEMENTACIONES INCREMENTALES>  
+- Una característica lógica a la vez.  
+- Pero resuelve completamente este cambio acomodando los cambios apropiados en otras partes del código.  
+- Ajusta todas las dependencias existentes y problemas creados por este cambio.  
+- preservación_arquitectónica: Asegúrate de que todo el nuevo código se integre perfectamente con la estructura y arquitectura del proyecto existente antes de comprometer los cambios. No realices cambios que interrumpan la organización o los archivos de código existentes.  
+</IMPLEMENTACIONES INCREMENTALES>  
+
+3. Pruebas de simulación.  
+<ANÁLISIS DE SIMULACIÓN>  
+- Simula interacciones y comportamientos de usuario realizando ejecuciones en seco, rastreos de llamadas u otros métodos apropiados para analizar rigurosamente el impacto de los cambios propuestos en escenarios esperados y casos límite.  
+- Genera retroalimentación sobre todos los posibles efectos secundarios.  
+</ANÁLISIS DE SIMULACIÓN>  
+<VALIDACIÓN DE SIMULACIÓN>  
+- No propongas un cambio a menos que la simulación pase y verifique que toda la funcionalidad existente se preserve. Si una simulación falla, proporciona correcciones inmediatamente antes de proceder.  
+</VALIDACIÓN DE SIMULACIÓN>  
+- Si las pruebas de simulación pasan, realiza la implementación real.  
+</HACER CAMBIOS>  
+
+[Paso: 4] Realiza <PRUEBAS>.  
+
+[Paso: 5] REPITE 1-4 e implementa todos los cambios.  
+- Incorpora todos los cambios sistemáticamente, uno por uno.  
+- Verifica los cambios y pruébalos uno por uno.  
+
+[Paso: 6] Optimiza los códigos implementados.  
+- Optimiza el código implementado después de que todos los cambios hayan sido probados y verificados.  
+
+</PROTOCOLO SISTEMÁTICO DE CÓDIGO>  
+
+<REFERENCIA>  
+- Referencia documentación relevante y mejores prácticas.  
+- Usa <USO WEB> si es necesario para consultar documentación o mejores prácticas.  
+</REFERENCIA>  
+
+# PRUEBAS (Siempre escribe PRUEBAS después de la IMPLEMENTACIÓN) [Modo ACT/Código]  
+<PRUEBAS>  
+
+<PRUEBAS BASADAS EN DEPENDENCIAS>  
+Crea pruebas unitarias para cualquier nueva funcionalidad. Ejecuta todas las pruebas desde <ANALIZAR CÓDIGO> para confirmar que el comportamiento existente sigue siendo el esperado.  
+</PRUEBAS BASADAS EN DEPENDENCIAS>  
+<AFIRMACIÓN DE NO RUPTURA>  
+Después de proponer un cambio, ejecuta las pruebas tú mismo y verifica que pasen. No confíes en mí para hacerlo, y asegúrate de que mi código no se rompa.  
+</AFIRMACIÓN DE NO RUPTURA>  
+
+1. Escribe la lógica de prueba en archivos separados de la implementación del código para mantener el código limpio y mantenible.  
+
+<PLAN DE PRUEBAS>  
+- Piensa en planes de prueba suficientemente exhaustivos para las funcionalidades añadidas/actualizadas en función de los requisitos y resultados deseados.  
+- Define escenarios de prueba completos que cubran casos límite.  
+- Especifica métodos de validación apropiados para la pila del proyecto.  
+- Sugiere enfoques de monitoreo para verificar la efectividad de la solución.  
+- Considera posibles regresiones y cómo prevenirlas.  
+</PLAN DE PRUEBAS>  
+
+2. Escribe código de prueba para CUALQUIER funcionalidad crítica añadida SIEMPRE. Para la generación inicial de pruebas, usa <PRUEBAS BASADAS EN DEPENDENCIAS> y <AFIRMACIÓN DE NO RUPTURA>. Luego usa <PLAN DE PRUEBAS> para escribir código para pruebas extensivas.  
+3. Documenta las pruebas como se especifica en @memory.mdc.  
+</PRUEBAS>  
+
+- Al implementar algo nuevo, sé implacable e implementa todo al pie de la letra. Detente solo cuando hayas terminado y probado con éxito, no antes.  
+
+---  
+Después de cada implementación/cambio de código SIEMPRE haz 2 cosas:  
+a. Actualiza otros códigos posiblemente afectados en `src` y otros códigos en otros lugares.  
+b. Actualiza la documentación en `docs/` y `tasks/`.  

@@ -1,0 +1,86 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Este archivo de reglas proporciona prácticas recomendadas completas para desarrollar con LangGraph, cubriendo organización del código, rendimiento, seguridad, pruebas y errores comunes. Ofrece orientación práctica para que los desarrolladores construyan aplicaciones LangGraph robustas y mantenibles.
+globs: **/*.py
+---
+# Mejores Prácticas y Estándares de Codificación para LangGraph
+
+Este documento describe las mejores prácticas y estándares de codificación para desarrollar con LangGraph. Su objetivo es proporcionar una guía clara y práctica para que los desarrolladores construyan aplicaciones LangGraph robustas, mantenibles y escalables. Cubre varios aspectos, incluyendo la organización del código, patrones comunes, consideraciones de rendimiento, seguridad, pruebas y errores comunes.
+
+## Información de la Biblioteca:
+
+- Nombre: langgraph
+- Etiquetas: ai, ml, llm, python, marco de agentes, flujo de trabajo
+
+## 1. Organización y Estructura del Código
+
+### 1.1. Mejores Prácticas para la Estructura de Directorios
+
+mi_proyecto_langgraph/
+├── data/                      # Conjuntos de datos, bases de conocimiento u otros archivos de datos.
+├── src/                       # Código fuente.
+│   ├── components/             # Componentes reutilizables (por ejemplo, nodos personalizados, herramientas).
+│   │   ├── __init__.py
+│   │   ├── retrieval.py        # Nodos relacionados con la recuperación
+│   │   ├── tool_selector.py    # Lógica para seleccionar qué herramienta usar
+│   │   └── ...
+│   ├── graphs/                 # Definiciones de gráficos.
+│   │   ├── __init__.py
+│   │   ├── customer_support.py  # Ejemplo: Gráfico de soporte al cliente.
+│   │   ├── rag_pipeline.py     # Ejemplo: Gráfico de pipeline RAG.
+│   │   └── ...
+│   ├── utils/                  # Funciones y ayudantes de utilidad.
+│   │   ├── __init__.py
+│   │   ├── config.py           # Carga de configuración
+│   │   ├── logging.py          # Configuración de registro
+│   │   └── ...
+│   ├── schemas/                # Esquemas de datos y definiciones de tipos.
+│   │   ├── __init__.py
+│   │   ├── agent_state.py      # Definición del estado del agente
+│   │   └── ...
+│   ├── main.py                 # Punto de entrada de la aplicación.
+│   └── ...
+├── tests/                     # Pruebas unitarias e integrales.
+│   ├── __init__.py
+│   ├── components/             # Pruebas para componentes personalizados.
+│   ├── graphs/                 # Pruebas para definiciones de gráficos.
+│   ├── utils/                  # Pruebas para funciones de utilidad.
+│   └── ...
+├── .env                       # Variables de entorno.
+├── requirements.txt           # Dependencias del proyecto.
+├── pyproject.toml            # Metadatos del proyecto y configuraciones de compilación.
+└── README.md                  # Documentación del proyecto.
+
+### 1.2. Convenciones para Nombres de Archivos
+
+- Archivos Python: `snake_case.py` (por ejemplo, `customer_support.py`, `retrieval_node.py`).
+- Nombres de clases: `PascalCase` (por ejemplo, `CustomerSupportGraph`, `RetrievalNode`).
+- Variables y funciones: `snake_case` (por ejemplo, `user_query`, `process_message`).
+- Archivos de configuración: `config.yaml` o `config.json`.
+
+### 1.3. Mejores Prácticas para la Organización de Módulos
+
+- Agrupa funcionalidades relacionadas en módulos (por ejemplo, `components`, `graphs`, `utils`).
+- Usa archivos `__init__.py` para convertir directorios en paquetes.
+- Mantén los módulos enfocados y evita archivos excesivamente grandes.
+- Usa importaciones relativas dentro de los módulos para evitar conflictos de nombres.
+
+### 1.4. Recomendaciones para la Arquitectura de Componentes
+
+- Diseña componentes reutilizables para tareas comunes (por ejemplo, recuperación de datos, resumen de texto, selección de herramientas).
+- Crea clases base abstractas o interfaces para componentes para promover la reutilización y modularidad del código.
+- Usa inyección de dependencias para configurar componentes y sus dependencias.
+- Adhiérete al Principio de Responsabilidad Única (SRP) al diseñar componentes.
+
+### 1.5. Estrategias para Dividir el Código
+
+- Divide definiciones de gráficos grandes en archivos más pequeños y manejables.
+- Usa carga diferida para componentes que no se necesitan de inmediato.
+- Considera usar un empaquetador de módulos (por ejemplo, esbuild a través de un plugin) para optimizar el tamaño del paquete para el despliegue.
+- Divide el sistema en microservicios si lo justifica la escala y complejidad del sistema general. Comunica entre microservicios usando REST o colas de mensajes.
+
+...

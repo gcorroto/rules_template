@@ -1,0 +1,196 @@
+---
+description: INCLUIR SIEMPRE para TENER Contexto del Proyecto.
+globs: 
+alwaysApply: true
+---
+# Estructura de Archivos de Memoria
+Esto describe los principios fundamentales, archivos requeridos, estructura de flujo de trabajo y procedimientos esenciales que rigen la documentación y el mantenimiento de una memoria utilizando el sistema de archivos.
+Los Archivos de Memoria consisten en archivos principales requeridos y archivos de contexto opcionales. Los archivos se construyen unos sobre otros en una jerarquía clara:
+```mermaid
+flowchart TD
+    PB[ [product_requirement_docs.md](mdc:docs/product_requirement_docs.md) ] --> PC[ [technical.md](mdc:docs/technical.md) ]
+    PB --> SP[ [architecture.md](mdc:docs/architecture.md) ]
+
+    SP --> TC[ [tasks_plan.md](mdc:tasks/tasks_plan.md) ]
+    PC --> TC
+    PB --> TC
+    
+    TC --> AC[ [active_context.md](mdc:tasks/active_context.md) ]
+
+    AC --> ER[ [error-documentation.mdc](mdc:.cursor/rules/error-documentation.mdc)]
+    AC --> LL[ [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc) ]
+    
+    subgraph LIT[ @docs/literature ]
+        L1[...]
+        L2[...]
+    end
+    
+    subgraph RFC[ @tasks/rfc/ ]
+        R1[...]
+        R2[...]
+    end
+    
+    PC --o LIT
+    TC --o RFC
+
+```
+## Archivos Principales (Requeridos)
+7 archivos: 
+1. [product_requirement_docs.md](mdc:docs/product_requirement_docs.md) (docs/product_requirement_docs.md): Documento de Requisitos del Producto (PRD) para el proyecto o un SOP. 
+   - Por qué existe este proyecto
+   - Problemas que resuelve
+   - Define requisitos y objetivos principales
+   - Documento base que da forma a todos los demás archivos
+   - Fuente de verdad para el alcance del proyecto
+   - Creado al inicio del proyecto si no existe
+
+2. [architecture.md](mdc:docs/architecture.md) (docs/architecture.md): Arquitectura del sistema
+   - Cómo debería funcionar
+   - Relaciones entre componentes
+   - Dependencias
+   - Flujo de trabajo de la solución
+   - Diagrama Mermaid de la visión general de la solución: cada componente y flujo de código
+
+3. [technical.md](mdc:docs/technical.md) (docs/technical.md): Entorno de desarrollo y stack
+   - Tecnologías utilizadas
+   - Configuración de desarrollo
+   - Decisiones técnicas clave
+   - Patrones de diseño en uso
+   - Restricciones técnicas
+
+4. [tasks_plan.md](mdc:tasks/tasks_plan.md) (tasks/tasks_plan.md): Lista detallada de tareas pendientes
+   - Lista de tareas en profundidad y progreso del proyecto
+   - Qué funciona
+   - Qué queda por construir
+   - Estado actual
+   - Problemas conocidos
+
+5. [active_context.md](mdc:tasks/active_context.md) (tasks/active_context.md): Estado actual del desarrollo
+   - Enfoque de trabajo actual
+   - Decisiones y consideraciones activas
+   - Cambios recientes
+   - Próximos pasos
+
+6. [error-documentation.mdc](mdc:.cursor/rules/error-documentation.mdc) (.cursor/rules/error-documentation.mdc): 
+   - Durante tu interacción, si encuentras una solución a un error en este proyecto o una corrección reutilizable, debes tomar nota en el archivo @error-documentation.mdc para no cometer el mismo error nuevamente.
+   - Problemas conocidos: su estado, contexto y resolución
+
+7. [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc) (.cursor/rules/lessons-learned.mdc): Diario de aprendizaje para cada proyecto
+   - Captura patrones importantes, preferencias e inteligencia del proyecto
+   - Está detallado en @lessons-learned.mdc
+
+## Archivos de Contexto (Opcionales)
+Documentos detallados. Recuperar bajo demanda si se necesita contexto.
+
+1. docs/literature/ :
+   - Encuestas y estudios de literatura están en este directorio  
+   - Cada tema de literatura es un archivo LaTeX (docs/literature/*.tex)
+
+2. tasks/rfc/ :
+   - Contiene RFC para cada tarea individual en @tasks_plan.md
+   - Los RFC estarán en formato de archivo LaTeX (tasks/*.tex)
+
+## Contexto Adicional
+Crea archivos o carpetas adicionales como Archivos de Memoria en docs/ o tasks/ cuando ayuden a organizar:
+- Especificaciones de integración
+- Estrategias de prueba
+- Configuraciones de benchmarking
+- Posibles extensiones
+- Procedimientos de despliegue
+
+# Flujos de Trabajo Principales
+Ahora definimos los flujos de trabajo procedimentales para leer/escribir en estos archivos de memoria.
+El sistema opera en MODOS distintos: (PLAN/ACT) o análogamente (Arquitecto/Código), controlados exclusivamente por la entrada del usuario o la tarea en la solicitud actual. La entrada actual determinará el MODO, basado en el cual siempre se dicta la selección del flujo de trabajo. En la entrada del usuario, también se puede especificar explícitamente el modo con "MODE = PLAN MODE"/"Architect MODE" o "MODE = ACT MODE"/"Code MODE", por lo que si está presente la configuración explícita del MODO, síguela; de lo contrario, adivina el modo a partir de la solicitud. Pregunta por el MODO si no estás 100% seguro, si tienes dudas, pregunta explícitamente.
+
+## MODO PLAN o Arquitecto
+```mermaid
+flowchart TD
+    Start[Inicio] --> ReadFiles[Leer Archivos de Memoria ("docs/": (a)"docs/architecture.md" (b)"docs/product_requirement_docs.md" (c)"docs/technical.md". "tasks/" : (a)"tasks/active_context.md" (b)"tasks/tasks_plan.md". si es necesario: "docs/literature" y "tasks/rfc") ]
+    ReadFiles --> CheckFiles{¿Archivos Completos?}
+    
+    CheckFiles -->|No| Plan[Crear Plan]
+    Plan --> DocumentChat[Documentar en el Chat]
+    
+    CheckFiles -->|Sí| VerifyContext[Verificar Contexto]
+    VerifyContext --> Strategy[Desarrollar Estrategia]
+    Strategy --> Present[Presentar Enfoque]
+    
+    Present --> Verification{¿Enfoque Verificado?}
+
+    Verification -->|No| Clarify[Buscar Aclaración]
+    Clarify --> Strategy[Desarrollar Estrategia]
+
+    Verification -->|Sí| DocumentMemory[Documentar en Archivos de Memoria ("docs/": (a)"docs/architecture.md" (b)"docs/product_requirement_docs.md" (c)"docs/technical.md". "tasks/" : (a)"tasks/active_context.md" (b)"tasks/tasks_plan.md" si es necesario: "docs/literature" y "tasks/rfc")]
+```
+
+## MODO ACT o Código
+```mermaid
+flowchart TD
+    Start[Inicio] --> Context[Revisar Archivos de Memoria (Archivos Principales siempre ("docs/": (a)"docs/architecture.md" (b)"docs/product_requirement_docs.md" (c)"docs/technical.md". "tasks/" : (a)"tasks/active_context.md" (b)"tasks/tasks_plan.md"), el resto según el contexto (si es necesario: "docs/literature" y "tasks/rfc")) ]
+    Context --> Update[Actualizar Documentación]
+    Update --> Rules[Actualizar [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc), [error-documentation.mdc](mdc:.cursor/rules/error-documentation.mdc) si es necesario]
+    Rules --> Execute[Ejecutar Tarea]
+    Execute --> Document[Documentar Cambios en Archivos de Memoria ("docs/": (a)"docs/architecture.md" (b)"docs/product_requirement_docs.md" (c)"docs/technical.md". "tasks/" : (a)"tasks/active_context.md" (b)"tasks/tasks_plan.md" si es necesario: "docs/literature" y "tasks/rfc") ]
+```
+
+# Actualizaciones de Documentación
+
+Las actualizaciones de Archivos de Memoria ocurren cuando:
+1. Se descubren nuevos patrones del proyecto
+2. Después de implementar cambios significativos
+3. Cuando el usuario solicita con **actualizar archivos de memoria** (DEBE revisar TODOS los Archivos Principales)
+4. Cuando el contexto necesita aclaración
+5. Después de que una parte significativa del Plan sea verificada
+
+```mermaid
+flowchart TD
+    Start[Proceso de Actualización]
+    
+    subgraph Process
+        P1[Revisar Archivos Principales]
+        P2[Documentar Estado Actual en [active_context.md](mdc:tasks/active_context.md) y [tasks_plan.md](mdc:tasks/tasks_plan.md) ]
+        P3[Aclarar Próximos Pasos y documentar en [tasks_plan.md](mdc:tasks/tasks_plan.md) ]
+        P4[Actualizar [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc), [error-documentation.mdc](mdc:.cursor/rules/error-documentation.mdc)]
+        P5 Actualizar [ [architecture.md](mdc:docs/architecture.md) ]
+        
+        P1 --> P2 --> P3 --> P4
+    end
+    
+    Start --> Process
+```
+
+Nota: Cuando se activa con **actualizar archivos de memoria**, DEBO revisar cada archivo de memoria principal, incluso si algunos no requieren actualizaciones. Enfócate particularmente en [active_context.md](mdc:tasks/active_context.md) y [tasks_plan.md](mdc:tasks/tasks_plan.md) ya que rastrean el estado actual. Y [architecture.md](mdc:docs/architecture.md) tiene una sección del flujo de trabajo actual que también se actualiza con cualquier actualización de código.
+
+# Inteligencia del Proyecto ( [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc) [.cursor/rules/lessons-learned.mdc] )
+
+El archivo [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc) es mi diario de aprendizaje para cada proyecto. Captura patrones importantes, preferencias e inteligencia del proyecto que me ayudan a trabajar de manera más efectiva. A medida que trabajo contigo y en el proyecto, descubriré y documentaré ideas clave que no son obvias solo con el código.
+
+```mermaid
+flowchart TD
+    Start{Descubrir Nuevo Patrón}
+    
+    subgraph Learn [Proceso de Aprendizaje]
+        D1[Identificar Patrón]
+        D2[Validar con el Usuario]
+        D3[Documentar en [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc) ]
+    end
+    
+    subgraph Apply [Uso]
+        A1[Leer [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc) ]
+        A2[Aplicar Patrones Aprendidos]
+        A3[Mejorar Trabajo Futuro]
+    end
+    
+    Start --> Learn
+    Learn --> Apply
+```
+
+## Qué Capturar
+- Rutas críticas de implementación
+- Preferencias y flujo de trabajo del usuario
+- Patrones específicos del proyecto
+- Desafíos conocidos
+- Evolución de decisiones del proyecto
+- Patrones de uso de herramientas
+
+El formato es flexible: enfócate en capturar ideas valiosas que me ayuden a trabajar de manera más efectiva contigo y en el proyecto. Piensa en [lessons-learned.mdc](mdc:.cursor/rules/lessons-learned.mdc) como un documento vivo que se vuelve más inteligente a medida que trabajamos juntos.
